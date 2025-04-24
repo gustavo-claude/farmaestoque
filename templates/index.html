@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial - Controle de Estoque</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        .navbar {
+            background-color: #f8f9fa; /* Cor de fundo clara */
+            padding: 5px 5px;
+            border-bottom: 1px solid #dee2e6; /* Linha divisória */
+        }
+        .navbar-left {
+            float: left;
+        }
+        .navbar-right {
+            float: right;
+            display: flex;
+            align-items: center;
+        }
+        .navbar-right a {
+            margin-left: 15px;
+            color: #007bff; /* Cor do link */
+            text-decoration: none;
+        }
+        .navbar-right a:hover {
+            text-decoration: underline;
+        }
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+            flex-wrap: wrap; /* Para responsividade em telas menores */
+        }
+        .card {
+            width: 200px;
+            height: 150px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span>Bem-vindo(a), {{ session['nome_usuario'] if 'nome_usuario' in session else 'Usuário' }}</span>
+		</div>
+		<div style="display: flex; align-items: center; justify-content: center;">
+			<img src="{{ url_for('static', filename='img/logo.svg') }}" alt="FarmaEstoque" style="height: 80px; margin-right: 10px;">
+		</div>
+		<div class="navbar-right">
+			<span>{{ usuario.nivel_acesso }}</span>
+			<a href="/logout"><i class="bi bi-box-arrow-right"></i> Sair</a>
+		</div>
+    </nav>
+
+    <div class="card-container">
+        <a href="/cadastro_medicamento" class="card">
+            <div class="card-body">
+                <i class="bi bi-capsule-pill" style="font-size: 3em;"></i>
+                <p class="mt-2">Cadastrar Medicamentos</p>
+            </div>
+        </a>
+        <a href="/novo_usuario" class="card">
+            <div class="card-body">
+                <i class="bi bi-person-plus-fill" style="font-size: 3em;"></i>
+                <p class="mt-2">Cadastrar Usuário</p>
+            </div>
+        </a>
+        <a href="/nova_entrada" class="card">
+            <div class="card-body">
+                <i class="bi bi-box-arrow-in-down" style="font-size: 3em;"></i>
+                <p class="mt-2">Entrada Medicamentos</p>
+            </div>
+        </a>
+        <a href="/nova_receita" class="card">
+            <div class="card-body">
+                <i class="bi bi-file-medical-fill" style="font-size: 3em;"></i>
+                <p class="mt-2">Gerar Receita</p>
+            </div>
+        </a>
+		<a href="/saida_direta" class="card">
+            <div class="card-body">
+                <i class="bi bi-arrow-right-square-fill" style="font-size: 3em;"></i>
+                <p class="mt-2">Saída Avulsa</p>
+            </div>
+        </a>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

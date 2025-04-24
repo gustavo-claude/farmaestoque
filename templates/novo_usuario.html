@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Novo Usuário</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Cinza claro de fundo */
+            color: #343a40; /* Preto acinzentado para o texto */
+        }
+        .navbar {
+            background-color: #f8f9fa; /* Cor de fundo clara */
+            padding: 5px 5px;
+            border-bottom: 1px solid #dee2e6; /* Linha divisória */
+        }
+        .navbar-left {
+            float: left;
+        }
+        .navbar-right {
+            float: right;
+            display: flex;
+            align-items: center;
+        }
+        .navbar-right a {
+            margin-left: 15px;
+            color: #007bff; /* Branco para os links */
+            text-decoration: none;
+        }
+        .navbar-right a:hover {
+            text-decoration: underline;
+            color: #cccccc;
+        }
+        .container {
+            margin-top: 80px; /* Espaçamento abaixo da barra de navegação */
+            background-color: white; /* Fundo branco para o conteúdo */
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        }
+        h1 {
+            color: #343a40; /* Preto acinzentado para o título */
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .form-label {
+            color: #495057; /* Cinza um pouco mais claro para os rótulos */
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #007bff; /* Azul primário (pode ser alterado para um tom de cinza se preferir) */
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d; /* Cinza secundário */
+            border-color: #6c757d;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #545b62;
+            border-color: #545b62;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span>Bem-vindo(a), {{ session['nome_usuario'] if 'nome_usuario' in session else 'Usuário' }}</span>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center;">
+			<img src="{{ url_for('static', filename='img/logo.svg') }}" alt="FarmaEstoque" style="height: 80px; margin-right: 10px;">
+		</div>
+        <div class="navbar-right">
+            <span>{{ session['nivel_acesso'] if 'nivel_acesso' in session else 'Nível Desconhecido' }}</span>
+            <a href="/logout"><i class="bi bi-box-arrow-right"></i> Sair</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Adicionar Novo Usuário</h1>
+        <form method="POST" action="/registrar_usuario">
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+            <div class="mb-3">
+                <label for="cpf" class="form-label">CPF</label>
+                <input type="text" class="form-control" id="cpf" name="cpf" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="senha" name="senha" required>
+            </div>
+            <div class="mb-3">
+                <label for="nivel_acesso" class="form-label">Nível de Acesso</label>
+                <select class="form-select" id="nivel_acesso" name="nivel_acesso" required>
+                    <option value="operador">Médico</option>
+                    <option value="administrador">Administrador</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar Usuário</button>
+            <a href="/" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
